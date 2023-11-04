@@ -1,8 +1,7 @@
 !#/bin/bash
 echo "パスワードマネージャーへようこそ！"
-while true
-do
-input =""
+while true; do
+input=""
 read -p "次の選択肢から入力してください(Add Password/Get Password/Exit):" input
 case "$input" in
 "Add Password")
@@ -15,21 +14,17 @@ echo "サービス名:$service,ユーザー名:$user,パスワード:$password" 
 
 "Get Password")
 read -p  "サービス名を入力してください:" serch
-results=($(grep "$serch" ./Customer_list))
-if [ -n "$results" ]; then
-for result in `echo "$results" | tr "," "\n"`
-do
-echo "$result"
-done
+result=($(grep "$serch" ./Customer_list))
+if [ -n "$result" ]; then
+grep "$serch" ./Customer_list | tr "," "\n"
 else echo "そのサービスは登録されていません。"
 fi;;
 
-
-"EXIT")
+"Exit")
 echo "Thank you!"
-break
+break;;
 
 *)
-echo "入力が間違えています。Add Password/Get Password/Exit から入力してください。"
+echo "入力が間違えています。Add Password/Get Password/Exit から入力してください。";;
 esac
 done
